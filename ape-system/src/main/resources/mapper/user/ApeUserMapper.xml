@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.ape.apesystem.mapper.ApeUserMapper">
+    <select id="getUserPage" resultType="apeUser">
+        select
+            u.id, u.dept_id, u.login_account, u.user_name,
+            u.email, u.avatar, u.tel, u.sex, u.status, u.del_flag,
+            u.login_ip, u.login_date, u.create_by, u.create_time, u.remark, d.dept_name
+        from ape_user u
+        left join ape_dept d on u.dept_id = d.id
+        <where>
+            1=1
+            <if test="ew.userName != null and ew.userName != ''">
+                and u.user_name like concat('%',#{ew.userName},'%')
+            </if>
+            <if test="ew.tel != null and ew.tel != ''">
+                and u.tel like concat('%',#{ew.tel},'%')
+            </if>
+            <if test="ew.status != null">
+                and u.status = #{ew.status}
+            </if>
+            <if test="ew.deptId != null and ew.deptId != ''">
+                and u.dept_id = #{ew.deptId}
+            </if>
+            and u.del_flag = 0
+        </where>
+    </select>
+</mapper>

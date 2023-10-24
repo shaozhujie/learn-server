@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.ape.apesystem.mapper.ApeGenTableMapper">
+    <select id="getTables" resultType="map">
+        select
+            t.TABLE_NAME as tableName,
+            t.TABLE_COMMENT as tableComment
+        from
+            information_schema.tables t
+        where
+            t.TABLE_TYPE = 'BASE TABLE'
+            and TABLE_schema = 'ape'
+        <if test="ew.tableName != null and ew.tableName != ''">
+            and t.TABLE_NAME like concat('%',#{ew.tableName},'%')
+        </if>
+        <if test="ew.tableComment != null and ew.tableComment != ''">
+            and t.TABLE_COMMENT like concat('%',#{ew.tableComment},'%')
+        </if>
+        <if test="tables.size > 0">
+            and t.TABLE_NAME not in
+            <foreach collection="tables" item="table" separator="," open="(" close=")">
+                #{table}
+            </foreach>
+        </if>
+    </select>
+
+    <select id="getTablesInfo" resultType="map">
+        select
+        t.TABLE_NAME as tableName,
+        t.TABLE_COMMENT as tableComment
+        from
+        information_schema.tables t
+        where
+        t.TABLE_TYPE = 'BASE TABLE'
+        and TABLE_schema = 'ape'
+        <if test="tableName != null and tableName != ''">
+            and t.TABLE_NAME like concat('%',#{tableName},'%')
+        </if>
+    </select>
+</mapper>

@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.ape.apesystem.mapper.ApeGenTableColumnMapper">
+    <select id="getTableField" resultType="map">
+        select COLUMN_NAME as `name`,COLUMN_COMMENT as `comment`,IS_NULLABLE as `isNull`,
+               DATA_TYPE as `type`,COLUMN_TYPE as `column`,COLUMN_KEY as `key`
+        from
+             information_schema.columns
+        where table_name = #{table}
+    </select>
+</mapper>

@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.ape.apesystem.mapper.ApeRoleMenuMapper">
+    <select id="getRoleMenusSet" resultType="string">
+        select
+            m.perms
+        from
+            ape_role r left join ape_role_menu rm on r.id = rm.role_id
+            left join ape_menu m on rm.menu_id = m.id
+        <where>
+            1=1
+            <if test="role != null and role != ''">
+                and r.role_key = #{role}
+            </if>
+        </where>
+    </select>
+</mapper>
