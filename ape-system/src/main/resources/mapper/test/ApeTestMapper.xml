@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.ape.apesystem.mapper.ApeTestMapper">
+    <select id="getStudentTotalScore" resultType="map">
+        select sum(s.point) as point,sum(s.score) as total from ape_test t left join ape_test_student s on t.id = s.test_id
+        where t.task_id = #{taskId} and s.user_id = #{userId}
+    </select>
+</mapper>

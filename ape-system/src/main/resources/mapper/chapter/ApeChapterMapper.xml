@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.ape.apesystem.mapper.ApeChapterMapper">
+    <select id="getStudentVideo" resultType="int">
+        select count(*) from ape_chapter c left join ape_chapter_video v on c.id = v.chapter_id
+        where c.task_id = #{taskId} and v.user_id = #{userId}
+    </select>
+</mapper>

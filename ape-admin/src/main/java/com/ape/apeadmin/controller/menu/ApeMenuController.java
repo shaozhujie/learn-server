@@ -99,6 +99,9 @@ public class ApeMenuController {
     @Log(name = "编辑菜单", type = BusinessType.UPDATE)
     @PostMapping("editMenu")
     public Result editMenu(@RequestBody ApeMenu apeMenu) {
+        if (StringUtils.isNotBlank(apeMenu.getIdArrary())) {
+            apeMenu.setParentId("0");
+        }
         ApeMenu menu = apeMenuService.getById(apeMenu.getId());
         if (apeMenu.getMenuType() != 0 ) {
             if (!menu.getPerms().equals(apeMenu.getPerms())) {

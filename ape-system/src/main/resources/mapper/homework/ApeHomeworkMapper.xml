@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.ape.apesystem.mapper.ApeHomeworkMapper">
+    <select id="getStudentHomeWork" resultType="String">
+        select s.chapter_id from ape_chapter c left join ape_homework_student s on c.id = s.chapter_id
+        where c.task_id = #{taskId} and s.user_id = #{userId} group by s.chapter_id
+    </select>
+    <select id="getTotalAssignCount" resultType="String">
+        select h.chapter_id from ape_chapter c left join ape_homework h on c.id = h.chapter_id
+        where c.task_id = #{taskId} group by h.chapter_id
+    </select>
+</mapper>

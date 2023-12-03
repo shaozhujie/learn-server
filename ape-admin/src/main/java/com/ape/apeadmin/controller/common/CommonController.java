@@ -47,7 +47,9 @@ public class CommonController {
         String coverType = img.getOriginalFilename().substring(img.getOriginalFilename().lastIndexOf(".") + 1).toLowerCase();
         if ("jpeg".equals(coverType)  || "gif".equals(coverType) || "png".equals(coverType) || "bmp".equals(coverType)  || "jpg".equals(coverType)) {
             //文件名=当前时间到毫秒+原来的文件名
-            String fileName = System.currentTimeMillis() + img.getOriginalFilename();
+            int index = img.getOriginalFilename().lastIndexOf(".");
+            String substring = img.getOriginalFilename().substring(index);
+            String fileName = System.currentTimeMillis() + substring;
             //文件路径
             String filePath = System.getProperty("user.dir")+System.getProperty("file.separator")+"img";
             //如果文件路径不存在，新增该路径
@@ -83,7 +85,9 @@ public class CommonController {
             return Result.fail("上传的视频不能为空!");
         }
         //文件名=当前时间到毫秒+原来的文件名
-        String fileName = System.currentTimeMillis() + file.getOriginalFilename();
+        int index = file.getOriginalFilename().lastIndexOf(".");
+        String substring = file.getOriginalFilename().substring(index);
+        String fileName = System.currentTimeMillis() + substring;
         //文件路径
         String filePath = System.getProperty("user.dir")+System.getProperty("file.separator")+"video";
         //如果文件路径不存在，新增该路径
@@ -97,7 +101,9 @@ public class CommonController {
         String storeVideoPath = "/video/"+fileName;
         try {
             file.transferTo(dest);
-            return Result.success(storeVideoPath);
+            Result success = Result.success(storeVideoPath);
+            success.setData(fileName);
+            return success;
         } catch (IOException e) {
             return Result.fail("上传失败");
         }
@@ -116,7 +122,9 @@ public class CommonController {
             return Result.fail("上传的文件不能为空!");
         }
         //文件名=当前时间到毫秒+原来的文件名
-        String fileName = System.currentTimeMillis() + file.getOriginalFilename();
+        int index = file.getOriginalFilename().lastIndexOf(".");
+        String substring = file.getOriginalFilename().substring(index);
+        String fileName = System.currentTimeMillis() + substring;
         //文件路径
         String filePath = System.getProperty("user.dir")+System.getProperty("file.separator")+"file";
         //如果文件路径不存在，新增该路径
@@ -130,7 +138,9 @@ public class CommonController {
         String storeFilePath = "/file/"+fileName;
         try {
             file.transferTo(dest);
-            return Result.success(storeFilePath);
+            Result success = Result.success(storeFilePath);
+            success.setData(fileName);
+            return success;
         } catch (IOException e) {
             return Result.fail("上传失败");
         }

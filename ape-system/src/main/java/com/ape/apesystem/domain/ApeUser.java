@@ -117,6 +117,53 @@ public class ApeUser extends BaseEntity {
     private Date pwdUpdateDate;
 
     /**
+     * 学校
+     */
+    private String school;
+
+    /**
+     * 国家
+     */
+    private String country;
+
+    /**
+     * 专业
+     */
+    private String major;
+
+    /**
+     * 职称
+     */
+    private String agree;
+
+    /**
+     * 年龄
+     */
+    private Integer age;
+
+    /**
+     * 年龄
+     */
+    @JsonFormat(pattern = "yyyy-MM-dd")
+    @DateTimeFormat(pattern = "yyyy-MM-dd")
+    private Date birth;
+
+    /**
+     * 资质
+     */
+    private String flair;
+
+    /**
+     * 地址
+     */
+    private String address;
+
+    /**
+     * 参加工作时间
+     */
+    private Integer workDate;
+
+    /**
      * 删除标志
      */
     @TableLogic

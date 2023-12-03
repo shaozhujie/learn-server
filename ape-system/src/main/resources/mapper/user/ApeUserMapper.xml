@@ -5,7 +5,7 @@
 <mapper namespace="com.ape.apesystem.mapper.ApeUserMapper">
     <select id="getUserPage" resultType="apeUser">
         select
-            u.id, u.dept_id, u.login_account, u.user_name,
+            u.id, u.dept_id, u.login_account, u.user_name,u.school,u.major,u.country,u.agree,u.age,u.birth,u.flair,u.address,u.work_date,
             u.email, u.avatar, u.tel, u.sex, u.status, u.del_flag,
             u.login_ip, u.login_date, u.create_by, u.create_time, u.remark, d.dept_name
         from ape_user u
@@ -15,11 +15,20 @@
             <if test="ew.userName != null and ew.userName != ''">
                 and u.user_name like concat('%',#{ew.userName},'%')
             </if>
+            <if test="ew.major != null and ew.major != ''">
+                and u.major like concat('%',#{ew.major},'%')
+            </if>
+            <if test="ew.school != null and ew.school != ''">
+                and u.school like concat('%',#{ew.school},'%')
+            </if>
             <if test="ew.tel != null and ew.tel != ''">
                 and u.tel like concat('%',#{ew.tel},'%')
             </if>
             <if test="ew.status != null">
                 and u.status = #{ew.status}
+            </if>
+            <if test="ew.userType != null">
+                and u.user_type = #{ew.userType}
             </if>
             <if test="ew.deptId != null and ew.deptId != ''">
                 and u.dept_id = #{ew.deptId}

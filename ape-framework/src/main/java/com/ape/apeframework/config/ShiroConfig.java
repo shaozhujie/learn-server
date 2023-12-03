@@ -43,8 +43,12 @@ public class ShiroConfig {
 
         Map<String, String> filterMap = new LinkedHashMap<>();
         filterMap.put("/login", "anon");
+        filterMap.put("/login/register", "anon");
+        filterMap.put("/classification/getApeClassificationList", "anon");
+        filterMap.put("/school/getApeSchoolList", "anon");
+        filterMap.put("/major/getApeMajorList", "anon");
         filterMap.put("/user/setUserAvatar/**", "anon");
-        filterMap.put("/common/uploadImg", "anon");
+        filterMap.put("/common/**", "anon");
         filterMap.put("/img/**", "anon");
         filterMap.put("/video/**", "anon");
         filterMap.put("/file/**", "anon");

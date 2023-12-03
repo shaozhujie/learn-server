@@ -7,8 +7,10 @@ import com.ape.apecommon.enums.BusinessType;
 import com.ape.apecommon.enums.ResultCode;
 import com.ape.apecommon.utils.PasswordUtils;
 import com.ape.apeframework.utils.ShiroUtils;
+import com.ape.apesystem.domain.ApeRole;
 import com.ape.apesystem.domain.ApeUser;
 import com.ape.apesystem.domain.ApeUserRole;
+import com.ape.apesystem.service.ApeRoleService;
 import com.ape.apesystem.service.ApeUserRoleService;
 import com.ape.apesystem.service.ApeUserService;
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
@@ -41,6 +43,8 @@ public class ApeUserController {
     @Autowired
     private ApeUserService apeUserService;
     @Autowired
+    private ApeRoleService apeRoleService;
+    @Autowired
     private ApeUserRoleService apeUserRoleService;
 
     /** 分页查询用户 */
@@ -49,6 +53,16 @@ public class ApeUserController {
     public Result getUserPage(@RequestBody ApeUser apeUser) {
         Page<ApeUser> page = apeUserService.getUserPage(apeUser);
         return Result.success(page);
+    }
+
+    /** 根据类型查询用户 */
+    @Log(name = "根据类型查询用户", type = BusinessType.OTHER)
+    @GetMapping("getUserListByType")
+    public Result getUserListByType(@RequestParam("type")Integer type) {
+        QueryWrapper<ApeUser> queryWrapper = new QueryWrapper<>();
+        queryWrapper.lambda().eq(ApeUser::getUserType,type);
+        List<ApeUser> userList = apeUserService.list(queryWrapper);
+        return Result.success(userList);
     }
 
     /** 根据id查询用户 */
@@ -99,6 +113,15 @@ public class ApeUserController {
                 apeUserRoles.add(apeUserRole);
             }
         }
+        if (apeUser.getUserType() == 1) {
+            ApeUserRole apeUserRole = new ApeUserRole();
+            apeUserRole.setUserId(uuid);
+            QueryWrapper<ApeRole> queryWrapper = new QueryWrapper<>();
+            queryWrapper.lambda().eq(ApeRole::getRoleKey,"teacher");
+            ApeRole role = apeRoleService.getOne(queryWrapper);
+            apeUserRole.setRoleId(role.getId());
+            apeUserRoles.add(apeUserRole);
+        }
         apeUserRoleService.saveBatch(apeUserRoles);
         return Result.success();
     }
@@ -133,6 +156,15 @@ public class ApeUserController {
                 apeUserRoles.add(apeUserRole);
             }
         }
+        if (apeUser.getUserType() == 1) {
+            ApeUserRole apeUserRole = new ApeUserRole();
+            apeUserRole.setUserId(apeUser.getId());
+            QueryWrapper<ApeRole> queryWrapper1 = new QueryWrapper<>();
+            queryWrapper1.lambda().eq(ApeRole::getRoleKey,"teacher");
+            ApeRole role = apeRoleService.getOne(queryWrapper1);
+            apeUserRole.setRoleId(role.getId());
+            apeUserRoles.add(apeUserRole);
+        }
         apeUserRoleService.saveBatch(apeUserRoles);
         return Result.success();
     }
@@ -161,6 +193,31 @@ public class ApeUserController {
             return Result.success();
         } else {
             return Result.fail("角色id不能为空！");
+        }
+    }
+
+    @Log(name = "修改密码", type = BusinessType.UPDATE)
+    @PostMapping("changePassword")
+    public Result changePassword(@RequestBody JSONObject json) {
+        String id = json.getString("id");
+        String password = json.getString("password");
+        ApeUser apeUser = apeUserService.getById(id);
+        boolean decrypt = PasswordUtils.decrypt(password, apeUser.getPassword() + "$" + apeUser.getSalt());
+        if (decrypt) {
+            String newPassword = json.getString("newPassword");
+            String encrypt = PasswordUtils.encrypt(newPassword);
+            String[] split = encrypt.split("\\$");
+            apeUser.setSalt(split[1]);
+            apeUser.setPassword(split[0]);
+            apeUser.setPwdUpdateDate(new Date());
+            boolean update = apeUserService.updateById(apeUser);
+            if (update) {
+                return Result.success();
+            } else {
+                return Result.fail(ResultCode.COMMON_DATA_OPTION_ERROR.getMessage());
+            }
+        } else {
+            return Result.fail("旧密码不正确");
         }
     }
 

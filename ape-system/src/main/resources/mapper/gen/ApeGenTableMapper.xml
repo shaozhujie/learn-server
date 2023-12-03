@@ -11,7 +11,7 @@
             information_schema.tables t
         where
             t.TABLE_TYPE = 'BASE TABLE'
-            and TABLE_schema = 'ape'
+            and TABLE_schema = 'ape-learn'
         <if test="ew.tableName != null and ew.tableName != ''">
             and t.TABLE_NAME like concat('%',#{ew.tableName},'%')
         </if>
@@ -34,7 +34,7 @@
         information_schema.tables t
         where
         t.TABLE_TYPE = 'BASE TABLE'
-        and TABLE_schema = 'ape'
+        and TABLE_schema = 'ape-learn'
         <if test="tableName != null and tableName != ''">
             and t.TABLE_NAME like concat('%',#{tableName},'%')
         </if>

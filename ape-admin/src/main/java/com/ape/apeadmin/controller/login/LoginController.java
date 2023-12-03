@@ -86,6 +86,36 @@ public class LoginController {
         return Result.success(json);
     }
 
+    @PostMapping("register")
+    public Result register(@RequestBody ApeUser apeUser) {
+        boolean account = checkAccount(apeUser);
+        if (!account) {
+            return Result.fail("登陆账号已存在不可重复！");
+        }
+        //密码加盐加密
+        String encrypt = PasswordUtils.encrypt(apeUser.getPassword());
+        String[] split = encrypt.split("\\$");
+        apeUser.setPassword(split[0]);
+        apeUser.setSalt(split[1]);
+        apeUser.setAvatar("/img/avatar.jpg");
+        apeUser.setPwdUpdateDate(new Date());
+        boolean save = apeUserService.save(apeUser);
+        if (save) {
+            return Result.success();
+        } else {
+            return Result.fail();
+        }
+    }
+
+    /** 校验用户 */
+    public boolean checkAccount(ApeUser apeUser) {
+        QueryWrapper<ApeUser> queryWrapper = new QueryWrapper<>();
+        queryWrapper.lambda().eq(ApeUser::getLoginAccount,apeUser.getLoginAccount())
+                .eq(ApeUser::getUserType,apeUser.getUserType());
+        int count = apeUserService.count(queryWrapper);
+        return count <= 0;
+    }
+
     @Log(name = "登出", type = BusinessType.OTHER)
     @GetMapping("logout")
     public Result logout() {
