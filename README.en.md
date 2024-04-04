@@ -1,7 +1,9 @@
-# learn_server
+# learn-server
 
 #### Description
-{**When you're done, you can delete the content in this README and update the file with details for others getting started with your repository**}
+基于SpringBoot+Vue的在线学习系统的设计与实现 包含课程学习、课程笔记、在线考试、自动评分、章节作业、学习情况、分数汇总等功能。
+采用技术：SpringBoot，shiro，Mybatis-plus，Vue，redis，mysql，ElementUi，echarts
+工具：idea，vscode，navicat
 
 #### Software Architecture
 Software architecture description

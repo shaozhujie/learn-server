@@ -1,9 +1,9 @@
-# learn_server
+# learn-server
 
 #### 介绍
-{**以下是 Gitee 平台说明，您可以替换此简介**
-Gitee 是 OSCHINA 推出的基于 Git 的代码托管平台（同时支持 SVN）。专为开发者提供稳定、高效、安全的云端软件开发协作平台
-无论是个人、团队、或是企业，都能够用 Gitee 实现代码托管、项目管理、协作开发。企业项目请看 [https://gitee.com/enterprises](https://gitee.com/enterprises)}
+基于SpringBoot+Vue的在线学习系统的设计与实现 包含课程学习、课程笔记、在线考试、自动评分、章节作业、学习情况、分数汇总等功能。
+采用技术：SpringBoot，shiro，Mybatis-plus，Vue，redis，mysql，ElementUi，echarts
+工具：idea，vscode，navicat
 
 #### 软件架构
 软件架构说明
