@@ -1,39 +1,16 @@
-# learn-server
+# learn-server基于SpringBoot+Vue的在线学习系统的设计与实现
 
 #### 介绍
-基于SpringBoot+Vue的在线学习系统的设计与实现 包含课程学习、课程笔记、在线考试、自动评分、章节作业、学习情况、分数汇总等功能。
-采用技术：SpringBoot，shiro，Mybatis-plus，Vue，redis，mysql，ElementUi，echarts
-工具：idea，vscode，navicat
-
-#### 软件架构
-软件架构说明
-
-
-#### 安装教程
-
-1.  xxxx
-2.  xxxx
-3.  xxxx
-
-#### 使用说明
-
-1.  xxxx
-2.  xxxx
-3.  xxxx
-
-#### 参与贡献
-
-1.  Fork 本仓库
-2.  新建 Feat_xxx 分支
-3.  提交代码
-4.  新建 Pull Request
-
-
-#### 特技
-
-1.  使用 Readme\_XXX.md 来支持不同的语言，例如 Readme\_en.md, Readme\_zh.md
-2.  Gitee 官方博客 [blog.gitee.com](https://blog.gitee.com)
-3.  你可以 [https://gitee.com/explore](https://gitee.com/explore) 这个地址来了解 Gitee 上的优秀开源项目
-4.  [GVP](https://gitee.com/gvp) 全称是 Gitee 最有价值开源项目，是综合评定出的优秀开源项目
-5.  Gitee 官方提供的使用手册 [https://gitee.com/help](https://gitee.com/help)
-6.  Gitee 封面人物是一档用来展示 Gitee 会员风采的栏目 [https://gitee.com/gitee-stars/](https://gitee.com/gitee-stars/)
+ **功能：** 
+用户：登录、注册、主页、课程、报名课程、视频播放学习、课程答疑、讲师详情、课程笔记、章节作业、下载课件、学习进度、在线考试、自动评分、公告列表、留言列表、关于、个人中心、我的课程、我的收藏、记笔记、我的作业、我的笔记、收藏笔记、错题集、退出登录
+教师：登录、教师注册、教师首页、教师课程管理、教师章节管理、学生笔记、考试管理、阅卷、考试题目录入、课程答疑、讨论管理、个人中心
+管理员：登录、首页、学校管理、专业管理、留言管理、课程管理、课程分类、章节管理、笔记管理、讨论管理、考试管理、教师管理、学生管理、通知公告、个人中心
+ **采用技术：** SpringBoot，shiro，Mybatis-plus，Vue，redis，mysql，ElementUi，echarts
+ **工具：** idea，vscode，navicat
+ **系统截图：** 
+![登录](img/image.png)
+![首页](img/image1.png)
+![课程](img/image2.png)
+![教师](img/image3.png)
+![输入图片说明](img/image4.png)
+![输入图片说明](img/image5.png)
