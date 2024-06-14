@@ -1,6 +1,9 @@
 # learn-server基于SpringBoot+Vue的在线学习系统的设计与实现
 
-**有问题可以咨询企鹅Q1760272627** 
+**有问题或者获取源码可以咨询企鹅Q1760272627** 
+
+**系统运行视频：** 
+https://www.bilibili.com/video/BV1JG411a77g/?vd_source=5f273f72fd3dc593e25c33cbccdad12ehttps://www.bilibili.com/video/BV1JG411a77g/?vd_source=5f273f72fd3dc593e25c33cbccdad12e
 
 ### 功能：
 用户：登录、注册、主页、课程、报名课程、视频播放学习、课程答疑、讲师详情、课程笔记、章节作业、下载课件、学习进度、在线考试、自动评分、公告列表、留言列表、关于、个人中心、我的课程、我的收藏、记笔记、我的作业、我的笔记、收藏笔记、错题集、退出登录
@@ -32,4 +35,4 @@ idea，vscode，navicat
 ![个人中心](img/image13.png)
 ![后台管理](img/image14.png)
 
-**有问题可以咨询企鹅Q1760272627** 
+**有问题或者获取源码可以咨询企鹅Q1760272627** 
